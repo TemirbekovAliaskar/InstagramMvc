@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <style>
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            color: #262626;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #262626;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #262626;
+            font-weight: bold;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3897f0;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1e6ac9;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Edit Profile</h2>
+
+    <form action="#" th:method="POST" th:action="@{/userInfo/edit/{userInfoId}(userInfoId=${userInfo.id})}" th:object="${userInfo}" >
+        <label for="fullName">Name:</label>
+        <input type="text" th:field="*{fullName}" id="fullName" required="required">
+
+        <label for="biography">Biography:</label>
+        <input type="text" th:field="*{biography}" id="biography" required="required">
+
+        <label for="gender">Gender:</label>
+        <input type="text" th:field="*{gender}" id="gender" required="required">
+
+        <label for="image">Image:</label>
+        <input type="text" th:field="*{image}" id="image" required="required">
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>

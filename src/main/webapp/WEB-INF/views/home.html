@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Profile</title>
+    <style>
+
+        .instagram-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3897f0;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: background-color 0.3s;
+        }
+
+        .instagram-button:hover {
+            background-color: #357ae8;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .profile-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 16px;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .profile-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #dbdbdb;
+            padding: 10px 20px;
+            display: flex;
+
+            justify-content: space-between;
+            align-items: flex-start; /* Выравнивание по левому краю */
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px; /* Добавляем отступ между логотипом и навигационными ссылками */
+        }
+
+        .navigation-links {
+            display: flex;
+            flex-direction: column; /* Размещение ссылок по вертикали */
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navigation-links li {
+            margin-bottom: 10px; /* Добавляем отступ между ссылками */
+        }
+
+        .navigation-links a {
+            text-decoration: none;
+            color: #262626;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+
+        }
+
+        .profile-picture {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            background-color: #ccc; /* Placeholder color */
+            margin-bottom: 20px;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .profile-actions {
+            margin-bottom: 20px;
+        }
+
+        .profile-actions button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 16px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .profile-actions button:hover {
+            background-color: #0056b3;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .profile-stats div {
+            flex: 1;
+        }
+
+        .profile-stats h3 {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+
+        .profile-stats a {
+            text-decoration: none;
+            color: #262626;
+            font-weight: bold;
+        }
+
+        .photos-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .photo {
+            width: 150px;
+            height: 150px;
+            background-color: #ddd; /* Placeholder color */
+            margin: 5px;
+        }
+        .profile-container{
+            width: 800px;
+            margin-top: 100px;
+            margin-left: -800px;
+        }
+        .profile-stats div {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">
+        <!-- Replace the text with your logo image -->
+
+    <ul class="navigation-links">
+        <li><a th:href="@{/post/all/{userId}(userId = ${user.id})}" href="#"><img src="https://img.icons8.com/?size=50&id=2797&format=png" alt="Home" style="height: 40px;"><br>Home</a></li>
+        <li><a th:href="@{/follower/all/{userId}(userId = ${user.id})}"><img src="https://image.shutterstock.com/image-vector/search-icon-vector-illustration-on-260nw-416112421.jpg" alt="Search" style="height: 40px;"><br>Search</a></li>
+        <li><a href="#"><img src="https://image.shutterstock.com/image-vector/black-hashtag-icon-260nw-345446816.jpg" alt="Interesting" style="height: 40px;"><br>Interesting</a></li>
+        <li><a href="#"><img src="https://img.icons8.com/?size=50&id=PxI9IPCyBAOD&format=png" alt="Reels" style="height: 40px;"><br>Reels</a></li>
+        <li><a href="#"><img src="https://img.icons8.com/?size=50&id=37966&format=png" alt="Message" style="height: 40px;"><br>Message</a></li>
+        <li><a href="#"><img src="https://image.shutterstock.com/image-vector/notification-icon-vector-material-design-260nw-759841507.jpg" alt="Notifications" style="height: 40px;"><br>Notifications</a></li>
+        <li><a href="#">Profile</a></li>
+    </ul>
+    </div>
+
+
+<div class="container1">
+<div class="profile-container">
+    <div class="profile" style="display: flex">
+        <img th:src="${user.getUserInfo().getImage()}" alt="Profile Picture" style="border-radius: 50%; width: 100px; height: 100px;  ">
+        <div class="profile-name"><a th:text="${user.getUserName()}"></a></div>
+    </div>
+    <div class="profile-actions">
+        <a th:href="@{/userInfo/update/{userInfoId}(userInfoId=${user.getId()})}" class="btn btn-primary">
+            <button class="profile-btn">Profile</button>
+        </a>
+        <button class="profile-btn">Settings</button>
+    </div>
+    <div class="profile-stats">
+        <div>
+            <h3 ><a th:href="@{/post/new/{userId}(userId=${user.getId()})}">Publications</a></h3>
+            <p th:text="${user.getPosts().size()}"></p>
+        </div>
+        <div>
+            <h3><a >Subscription</a></h3>
+            <p th:text="${user.getFollower().getSubscriptions().size()}"></p>
+        </div>
+<!--            <li><span><p th:text="${post}" ></p></span>Posts</li>-->
+        <div>
+            <h3><a >Subscribers</a></h3>
+            <p th:text="${user.getFollower().getSubscribers().size()}"></p>
+        </div>
+        <div>
+
+<!--&lt;!&ndash;            Подписки   &ndash;&gt;-->
+<!--            <h3>Subscription</h3>-->
+<!--            <p>0 </p>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--&lt;!&ndash;            Подписчики  &ndash;&gt;-->
+<!--            <h3>Subscribers</h3>-->
+<!--            <p>0</p>-->
+<!--        </div>-->
+    </div>
+    <div class="photos-container">
+        <!-- Placeholder for photos -->
+        <div class="photo">
+            <a th:href="@{/post/details/{userId}(userId=${user.getId()})}" class="instagram-button">Posts</a>
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

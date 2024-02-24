@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .search-input {
+            padding: 8px;
+            width: 60%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+            box-sizing: border-box;
+        }
+        .search-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .search-btn:hover {
+            background-color: #0056b3;
+        }
+        .user-details {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .user-details:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .user-info {
+            flex-grow: 1;
+        }
+        .user-info p {
+            margin-bottom: 10px;
+            color: #666;
+        }
+        .user-profile-pic {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+        }
+        .user-profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .actions {
+            display: flex;
+            align-items: center;
+        }
+        .subscribe-btn, .followers-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 16px;
+            margin-right: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .subscribe-btn:hover, .followers-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .subscribe-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #ff0000; /* Красный цвет кнопки */
+            color: #fff; /* Белый текст */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .subscribe-btn:hover {
+            background-color: #cc0000; /* Темно-красный цвет при наведении */
+        }
+
+        .followers-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff; /* Синий цвет кнопки */
+            color: #fff; /* Белый текст */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .followers-btn:hover {
+            background-color: #0056b3; /* Темно-синий цвет при наведении */
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>User</h2>
+    <div class="search-bar">
+    </div>
+    <div th:if="${user}" class="user-details">
+        <div class="user-profile-pic">
+            <img th:src="${user.getUserInfo().getImage()}" alt="Profile Pic">
+        </div>
+        <div class="user-info">
+            <p><strong>Username:</strong> <span th:text="${user.getUserName()}"></span></p>
+            <p><strong>Email:</strong> <span th:text="${user.getEmail()}"></span></p>
+            <p><strong>Phone Number:</strong> <span th:text="${user.getPhoneNumber()}"></span></p>
+        </div>
+        <div class="actions">
+            <a th:href="@{/follower/follow/{currentUserId}/{foundUserId}(currentUserId=${user.id},foundUserId=${userId})}" class="subscribe-btn">Subscribe</a>
+            <button class="followers-btn" onclick="showFollowers()">Followers</button>
+        </div>
+
+    </div>
+</div>
+<script>
+    function subscribe() {
+        alert("Subscribed successfully!");
+        // Add logic to handle subscription
+    }
+
+    function showFollowers() {
+        alert("Displaying followers...");
+        // Add logic to show user's followers
+    }
+</script>
+</body>
+</html>

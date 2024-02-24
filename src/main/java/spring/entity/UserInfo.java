@@ -1,29 +1,30 @@
 package spring.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import spring.entity.enums.Gender;
 
+import static jakarta.persistence.CascadeType.REFRESH;
+
 @Entity
 @Table(name = "userInfos")
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
-@SequenceGenerator(name = "base_id_gen",sequenceName = "userInfo_seq",allocationSize = 1)
+@SequenceGenerator(name = "base_id_gen",sequenceName = "userInfo_seq",allocationSize = 1,initialValue = 2)
 public class UserInfo extends BaseID {
 
+    @Column(name = "full_name")
     private String fullName;
     private String biography;
+    @Enumerated(EnumType.STRING)
     private Gender gender;
-    private String imageLink;
+    private String image;
 
-    @OneToOne(mappedBy = "userInfo")
+    //*********************************************
+    @OneToOne
     private User user;
 }
