@@ -48,11 +48,18 @@ public class PostRepoImpl implements PostRepository {
         entityManager.getTransaction().commit();
     }
 
-    @Override
-    public void delete(Long id) {
+@Override
+    public void remove(Long userId, Long postId) {
         entityManager.getTransaction().begin();
-        Post post = entityManager.find(Post.class, id);
-        entityManager.remove(post);
+        List<Image> images = entityManager.createQuery("select i from Image i where i.post.id = :Id", Image.class)
+                .setParameter("Id", postId)
+                .getResultList();
+        for (Image image : images) {
+            System.out.println("image = " + image);
+            image.setPost(null);
+            entityManager.remove(image);
+        }
+        entityManager.remove(entityManager.find(Post.class, postId));
         entityManager.getTransaction().commit();
     }
 }

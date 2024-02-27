@@ -40,6 +40,6 @@ public class FollowerApi {
 
         model.addAttribute("subscribers",followerService.subscribers(userService.finById(currentUserId).getFollower().getId()));
 //        model.addAttribute("subscriptions",followerService.subscriptions(userService.finById(foundUserId).getFollower().getId()));
-        return "home-search";
+        return "searchResult";
     }
 }

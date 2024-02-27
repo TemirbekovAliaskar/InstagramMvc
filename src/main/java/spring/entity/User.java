@@ -38,6 +38,9 @@ public class User extends BaseID {
     //*********************************************
     @OneToMany(cascade = {REMOVE}, mappedBy = "user")
     private List<Comment> comments;
+    @OneToOne(mappedBy = "user")
+    private Like like;
+
 
     public void addComment(Comment comment){
         if (this.comments == null) this.comments = new ArrayList<>();

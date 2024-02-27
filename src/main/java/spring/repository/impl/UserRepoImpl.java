@@ -17,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 public class UserRepoImpl implements UserRepository {
-
     private final EntityManager entityManager;
     @Override
     public void register(User user) {

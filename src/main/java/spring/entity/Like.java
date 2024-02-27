@@ -15,13 +15,15 @@ import static jakarta.persistence.CascadeType.DETACH;
 @NoArgsConstructor
 @SequenceGenerator(name = "base_id_gen",sequenceName = "like_seq",allocationSize = 1)
 public class Like extends BaseID {
+
     private Boolean isLike ;
 
     //*********************************************
-    @OneToOne(cascade = {DETACH})
+    //ManyToOne
+    @OneToOne
     private User user;
     //*********************************************
-    @ManyToOne(cascade = {DETACH})
+    @ManyToOne()
     private Comment comment;
     //*********************************************
     @ManyToOne(cascade = {DETACH})

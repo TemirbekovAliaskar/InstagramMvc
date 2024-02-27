@@ -32,7 +32,7 @@ public class FollowerRepoImpl implements FollowerRepository{
         Follower follower = entityManager.find(Follower.class, followerId);
         return follower.getSubscriptions().size();
     }
-
+@Override
     public void following(Long currentUserId, Long foundUserId) {
 
 
@@ -45,7 +45,7 @@ public class FollowerRepoImpl implements FollowerRepository{
         boolean foundUs = false;
 
         for (Long subscriptionId : subscriptions) {
-            if (subscriptionId.equals(foundUserId)){
+            if (subscriptionId.equals(foundUserId)) {
                 subscriptions.remove(subscriptionId);
                 foundUs = true;
                 break;
@@ -55,14 +55,14 @@ public class FollowerRepoImpl implements FollowerRepository{
 
 
         for (Long subscriber : subscribers) {
-            if (subscriber.equals(currentUserId)){
+            if (subscriber.equals(currentUserId)) {
                 subscribers.remove(subscriber);
                 foundUs = true;
                 break;
             }
         }
         if (!foundUs) subscribers.add(currentUserId);
-
+    }
 
 //        for (Long subscriberId : subscribers) {
 //            if (subscriberId.equals(currentUserId)){
@@ -73,5 +73,7 @@ public class FollowerRepoImpl implements FollowerRepository{
 //        }
 //        if (!foundUs) subscribers.add(currentUserId);
 
-    }
+
+
+
 }

@@ -33,7 +33,7 @@ public class Post extends BaseID {
     @OneToMany(cascade = {ALL}, mappedBy = "post", fetch = FetchType.EAGER)
     private List<Comment> comments;
     //*********************************************
-    @OneToMany(cascade = {ALL}, mappedBy = "post", fetch = FetchType.EAGER)
+    @OneToMany(cascade = {REMOVE,PERSIST}, mappedBy = "post", fetch = FetchType.EAGER)
     private List<Like> likes ;
     //*********************************************
 
@@ -43,11 +43,6 @@ public class Post extends BaseID {
     @Transient
     private String imageURL;
 
-
-//    public Post() {
-//        this.comments = new ArrayList<>();
-//        this.likes = new ArrayList<>();
-//    }
     public void addImage(Image image) {
         if (images == null) images = new ArrayList<>();
         images.add(image);
@@ -59,4 +54,8 @@ public class Post extends BaseID {
         this.comments.add(comment);
     }
 
+    public void addLike(Like like) {
+        if (this.likes == null) this.likes = new ArrayList<>();
+        this.likes.add(like);
+    }
 }

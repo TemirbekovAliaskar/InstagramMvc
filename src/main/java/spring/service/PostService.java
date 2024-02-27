@@ -10,5 +10,6 @@ public interface PostService {
     void savePost(Long userId,Post post);
     Post findById(Long id);
     void updatePost(Long id,Post post);
-    void delete(Long id);
+
+    void remove(Long userId, Long postId);
 }

@@ -36,7 +36,7 @@ public class UserInfoApi {
     public String update(@ModelAttribute("userInfo") UserInfo userInfo,
                          @PathVariable Long userInfoId) {
         userInfoService.updateByUserInfoId(userInfoId, userInfo);
-        return "edit-userInfo";
+        return "redirect:/userInfo/update/{userInfoId}";
     }
 
 }

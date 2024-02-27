@@ -29,7 +29,7 @@ public class CommentApi {
     public String commentSave(@ModelAttribute("newComment") Comment comment,
                               @PathVariable Long userId, @PathVariable Long postId) {
         commentService.comment(userId, postId, comment);
-        return "commentForm";
+        return "redirect:/comments/newComment/{userId}/{postId}";
     }
 }
 

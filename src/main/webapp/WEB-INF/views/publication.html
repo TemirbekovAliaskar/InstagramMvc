@@ -63,6 +63,39 @@
         .like-btn:hover, .comment-btn:hover {
             background-color: #0056b3;
         }
+
+
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Стили для кнопки "Update" */
+        .update-btn {
+            background-color: #4CAF50; /* Зеленый цвет */
+            color: white;
+        }
+
+        .update-btn:hover {
+            background-color: #45a049; /* Темно-зеленый цвет при наведении */
+        }
+
+        /* Стили для кнопки "Delete" */
+        .delete-btn {
+            background-color: #f44336; /* Красный цвет */
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background-color: #da190b; /* Темно-красный цвет при наведении */
+        }
     </style>
 </head>
 <body>
@@ -79,10 +112,11 @@
                 <p><strong>Date:</strong> <span th:text="${post.getCreatedAt()}"></span></p>
 
                 <div class="actions">
-                    <button class="like-btn">Like</button>
-                    <button class="comment-btn">Comment</button>
-                    <a th:href="@{/post/update/{postId}(postId=${post.id})}" class="btn btn-primary">Update</a>
-                    <a th:href="@{/post/delete/{postId}(postId=${post.id})}" class="btn btn-primary">Delete</a>
+<!--                    <button class="like-btn">Like</button>-->
+<!--                    <button class="comment-btn">Comment</button>-->
+                    <a th:href="@{/post/update/{postId}(postId=${post.id})}" class="btn btn-primary update-btn">Update</a>
+                    <a th:href="@{/post/delete/{userId}/{postId}(userId =${userId},postId=${post.id})}" class="btn btn-primary delete-btn">Delete</a>
+
 <!--                    <a th:href="@{/comments/newComment/{userId}/{postId}(userId=${userId},postId=${post.id})}" class="btn btn-primary">Add Comment</a>-->
 
                 </div>

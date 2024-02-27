@@ -1,6 +1,7 @@
 package spring.repository.impl;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -16,40 +17,28 @@ import java.util.List;
 @Transactional
 public class LikeRepoImpl implements LikeRepository {
 
+    @PersistenceContext
     private final EntityManager entityManager;
 
-
-    @Override
-    public void likePost(Long userId, Long postId) {
-        entityManager.getTransaction().begin();
-        User user = entityManager.find(User.class, userId);
-        Post post = entityManager.find(Post.class, postId);
-
-
-        // Проверяем, был ли уже установлен лайк от данного пользователя для данного поста
-        Like existingLike = entityManager.createQuery(
-                        "SELECT l FROM Like l WHERE l.user = :user AND l.post = :post", Like.class)
-                .setParameter("user", user)
-                .setParameter("post", post)
-                .getResultList()
-                .stream()
-                .findFirst()
-                .orElse(null);
-
-        // Если лайк уже существует, просто выходим из метода
-        if (existingLike != null) {
-            return;
+        @Override
+        public void likePost(Long userId, Long postId,Like like) {
+            Post post = entityManager.find(Post.class, postId);
+            User user = entityManager.find(User.class, userId);
+            boolean islike = true;
+            for (Like like1: post.getLikes()){
+                if(like1.getUser().getId().equals(userId)){
+                    like1.setIsLike(false);
+                    like1.setUser(null);
+                    like1.setPost(null);
+                    post.getLikes().remove(like1);
+                    entityManager.remove(like1);
+                    islike = false;
+                    break;
+                }
+            }
+            if (islike){like.setUser(user);
+                post.addLike(like);
+                like.setPost(post);
+                entityManager.persist(like);}
         }
-
-        // Создаем новый лайк
-        Like like = new Like();
-        like.setUser(user);
-        like.setPost(post);
-        like.setIsLike(true); // Устанавливаем значение лайка
-
-        // Сохраняем лайк
-        entityManager.persist(like);
-        entityManager.getTransaction().commit();
-
-    }
 }

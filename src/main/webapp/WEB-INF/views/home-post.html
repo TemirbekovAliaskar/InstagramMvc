@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post Details</title>
+    <!-- Add Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,18 +53,32 @@
             justify-content: flex-start;
         }
         .like-btn, .comment-btn {
-            background-color: #007bff;
-            color: #fff;
+            background-color: transparent;
+            color: #ff0000; /* Red color */
             border: none;
             border-radius: 5px;
             padding: 8px 16px;
             margin-right: 10px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: color 0.3s;
         }
         .like-btn:hover, .comment-btn:hover {
-            background-color: #0056b3;
+            color: #d60000; /* Dark red color on hover */
+        }
 
+
+        .update-btn {
+            background-color: #4CAF50; /* Green color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .update-btn:hover {
+            background-color: #45a049; /* Darker green color on hover */
         }
     </style>
 </head>
@@ -79,9 +95,10 @@
                 <p><strong>Description:</strong> <span th:text="${post.getDescription()}"></span></p>
                 <p><strong>Date:</strong> <span th:text="${post.getCreatedAt()}"></span></p>
                 <div class="actions">
-                    <a class="like-btn" th:href="@{/post/likes/{userId}/{postId}(userId=${userId},postId=${post.id})}">Like</a>
+                    <!-- Replace text with heart icon -->
+                    <a class="like-btn" th:href="@{/post/likes/{userId}{postId}(userId=${userId},postId=${post.id})}"><i class="fas fa-heart"></i></a>
 
-                    <a th:href="@{/comments/newComment/{userId}/{postId}(userId=${loginUserId},postId=${post.getId()})}" class="btn btn-primary">View Comment</a>
+                    <a th:href="@{/comments/newComment/{userId}/{postId}(userId=${loginUserId},postId=${post.getId()})}" class="btn btn-primary update-btn">comment</a>
                 </div>
             </div>
         </div>
